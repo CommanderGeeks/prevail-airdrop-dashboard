@@ -1,0 +1,130 @@
+{
+  "version": "0.1.0",
+  "name": "airdrop_program",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "airdropState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "airdrop",
+      "accounts": [
+        {
+          "name": "airdropState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "recipientLoader",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "recipients",
+          "type": {
+            "vec": "publicKey"
+          }
+        },
+        {
+          "name": "amounts",
+          "type": {
+            "vec": "u64"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "AirdropState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "totalAirdropped",
+            "type": "u64"
+          },
+          {
+            "name": "totalAirdrops",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecipientData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "recipient",
+            "type": "publicKey"
+          },
+          {
+            "name": "amountReceived",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "AirdropBatchEvent",
+      "fields": [
+        {
+          "name": "recipients",
+          "type": {
+            "vec": "publicKey"
+          },
+          "index": false
+        },
+        {
+          "name": "amounts",
+          "type": {
+            "vec": "u64"
+          },
+          "index": false
+        },
+        {
+          "name": "timestamp",
+          "type": "i64",
+          "index": false
+        }
+      ]
+    }
+  ]
+}
