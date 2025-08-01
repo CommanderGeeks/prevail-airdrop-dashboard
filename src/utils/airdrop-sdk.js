@@ -1,10 +1,12 @@
 import { Connection, PublicKey, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { AnchorProvider, Program, BN } from '@coral-xyz/anchor';
-import {AIRDROP_IDL} from './idl/airdrop_idl'; // Adjust the path as necessary
+
+// Import the IDL as default export
+import IDL from '../idl/airdrop_program.json';
 
 export class AirdropSDK {
   // Program ID - replace with your deployed program ID
-  static PROGRAM_ID = new PublicKey('Airdrop11111111111111111111111111111111111');
+  static PROGRAM_ID = new PublicKey('USAkHZLm96EARLZJERKvMwNtsMLnSLoJ9CpjgEM6XJf');
 
   constructor(connection, wallet) {
     this.connection = connection;
@@ -16,8 +18,8 @@ export class AirdropSDK {
       { commitment: 'confirmed' }
     );
     
-    // Create program
-    this.program = new Program(AIRDROP_IDL, AirdropSDK.PROGRAM_ID, this.provider);
+    // Create program - use IDL directly
+    this.program = new Program(IDL, AirdropSDK.PROGRAM_ID, this.provider);
   }
 
   /**

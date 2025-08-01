@@ -9,17 +9,21 @@ module.exports = function override(config, env) {
     "assert": require.resolve("assert"),
     "http": require.resolve("stream-http"),
     "https": require.resolve("https-browserify"),
-    "os": require.resolve("os-browserify"),
+    "os": require.resolve("os-browserify/browser"),
     "url": require.resolve("url"),
-    "process": require.resolve("process/browser.js"),
-    "buffer": require.resolve("buffer")
+    "process": require.resolve("process/browser"),
+    "buffer": require.resolve("buffer"),
+    "path": require.resolve("path-browserify"),
+    "fs": false,
+    "net": false,
+    "tls": false
   };
 
   // Add plugins
   config.plugins = [
     ...config.plugins,
     new webpack.ProvidePlugin({
-      process: 'process/browser.js',
+      process: 'process/browser',
       Buffer: ['buffer', 'Buffer']
     })
   ];
@@ -31,6 +35,9 @@ module.exports = function override(config, env) {
       fullySpecified: false
     }
   });
+
+  // Ignore source map warnings for node_modules
+  config.ignoreWarnings = [/Failed to parse source map/];
 
   return config;
 };

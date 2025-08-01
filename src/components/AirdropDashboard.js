@@ -3,6 +3,10 @@ import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { Shield, Zap, Send, Users, DollarSign, Activity, AlertCircle, CheckCircle } from 'lucide-react';
 import { AirdropSDK } from '../utils/airdrop-sdk';
+import './AirdropDashboard.css';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import './WalletButton.css';
 
 const AirdropDashboard = () => {
   const wallet = useWallet();
@@ -15,6 +19,32 @@ const AirdropDashboard = () => {
   const [recentAirdrops, setRecentAirdrops] = useState([]);
   const [notification, setNotification] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false);
+
+  const WalletConnectButton = () => {
+  const { wallet, connect, disconnect, connecting, connected, publicKey } = useWallet();
+
+  const handleClick = async () => {
+    try {
+      if (!connected && wallet) {
+        await connect();
+      } else if (!wallet) {
+        // If no wallet is selected, the multi button will handle showing the modal
+        console.log('No wallet selected, showing wallet modal...');
+      }
+    } catch (error) {
+      console.error('Wallet connection error:', error);
+    }
+  };
+
+  // Use the built-in WalletMultiButton which handles the modal properly
+  return (
+    <div className="wallet-adapter-button-wrapper">
+      <WalletMultiButton className="wallet-adapter-button" />
+    </div>
+  );
+};
+
+export default WalletConnectButton;
 
   // Create SDK instance
   const sdk = useMemo(() => {

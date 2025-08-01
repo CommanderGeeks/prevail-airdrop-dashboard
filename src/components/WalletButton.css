@@ -1,0 +1,42 @@
+/* WalletButton.css */
+
+/* Override wallet adapter button styles */
+.wallet-adapter-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-adapter-button {
+  background-color: #059669 !important;
+  color: white !important;
+  font-weight: bold !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.2s !important;
+  border: none !important;
+}
+
+.wallet-adapter-button:hover {
+  background-color: #047857 !important;
+  transform: scale(1.05);
+}
+
+.wallet-adapter-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Style the dropdown */
+.wallet-adapter-dropdown {
+  background-color: #111827 !important;
+  border: 1px solid #374151 !important;
+}
+
+.wallet-adapter-dropdown-list-item {
+  color: white !important;
+}
+
+.wallet-adapter-dropdown-list-item:hover {
+  background-color: #1f2937 !important;
+}
